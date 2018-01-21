@@ -17,9 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { (success, error) in
             
-        }
+        })
+        let optionOne = UNNotificationAction(identifier: "optionOne", title: "Test One", options: UNNotificationActionOptions.foreground)
+        let optionTwo = UNNotificationAction(identifier: "optionTwo", title: "Test two", options: UNNotificationActionOptions.foreground)
+        let optionThree = UNNotificationAction(identifier: "optionThree", title: "Three Three", options: UNNotificationActionOptions.foreground)
+        
+        let testCategory = UNNotificationCategory(identifier: "testCategory", actions: [optionOne, optionTwo, optionThree], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([testCategory])
+        
         return true
     }
 
